@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('customer_name'); // nama tamu / pemesan
             $table->string('customer_phone')->nullable(); // opsional
             $table->string('status')->default('pending'); // pending, proses, selesai
+            $table->integer('total_price')->default(0);
             $table->timestamps();
         });
 

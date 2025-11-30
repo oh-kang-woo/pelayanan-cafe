@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->id();
-            $table->string('name'); // misal "Meja 1"
-            $table->integer('capacity')->default(4); // optional
+            $table->string('name'); // contoh: Meja 1, Meja 2
+            $table->integer('position_x'); // untuk posisi di map layout
+            $table->integer('position_y');
+            $table->enum('status', ['available', 'occupied'])->default('available');
             $table->timestamps();
         });
     }
