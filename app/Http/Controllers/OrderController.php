@@ -7,37 +7,56 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Menu;
 use App\Models\Table;
-use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use App\Helpers\Notify;
 
 class OrderController extends Controller
 {
-    // Barista: daftar order
-    public function index() {
-        $orders = Order::with('table','items.menu','user')
-            ->orderBy('created_at','desc')
-            ->get();
-
-        return view('orders.index', compact('orders'));
-    }
-
-    // Waiter pilih menu setelah pilih meja
-    public function createFromTable($tableId)
+    // Simpan order (umum)
+    public function store(Request $request)
     {
-        $table = Table::findOrFail($tableId);
-        $menus = Menu::all();
+        $order = Order::create([
+            'table_id' => $request->table_id,
+            'user_id' => auth()->id(),
+            'customer_name' => $request->customer_name,
+            'customer_phone' => $request->customer_phone,
+            'status' => 'pending',
+            'total_price' => $request->total_price
+        ]);
 
-        return view('waiters.orders.create', compact('table', 'menus'));
+        // Notifikasi untuk waiter
+        $waiters = User::where('role','waiter')->get();
+        foreach ($waiters as $w) {
+            Notify::send(
+                $w->id,
+                "Pesanan Baru",
+                "Ada pesanan baru dari meja {$order->table_id}",
+                "order"
+            );
+        }
+
+        // Notifikasi untuk barista
+        $baristas = User::where('role','barista')->get();
+        foreach ($baristas as $b) {
+            Notify::send(
+                $b->id,
+                "Order Masuk",
+                "Ada pesanan yang harus dibuat",
+                "order"
+            );
+        }
+
+        return back();
     }
 
-    // Simpan order
-    public function storeFromTable(Request $request)
+    // Buat order dari waiter (pilih meja)
+   public function storeFromTable(Request $request)
     {
         $request->validate([
             'table_id' => 'required|exists:tables,id',
             'customer_name' => 'required|string|max:255',
         ]);
 
-        // Buat order
         $order = Order::create([
             'table_id' => $request->table_id,
             'user_id'  => auth()->id(),
@@ -46,7 +65,6 @@ class OrderController extends Controller
             'status'   => 'pending',
         ]);
 
-        // Simpan item order
         foreach ($request->menus as $menuId => $qty) {
             if ($qty > 0) {
                 $menu = Menu::find($menuId);
@@ -60,33 +78,44 @@ class OrderController extends Controller
             }
         }
 
-        // ubah meja jadi occupied
+        // UPDATE STATUS MEJA
         Table::where('id', $request->table_id)
             ->update(['status' => 'occupied']);
+
+        // ============================================
+        // 🔔 NOTIFIKASI BARISTA (PENTING)
+        // ============================================
+        $baristas = User::where('role', 'barista')->get();
+
+        foreach ($baristas as $b) {
+            Notify::send(
+                $b->id,
+                "Order Masuk",
+                "Ada pesanan baru dari meja {$order->table_id}",
+                "order"
+            );
+        }
 
         return redirect()->route('waiters.table.select')
             ->with('success', 'Order berhasil dibuat!');
     }
 
-    // Barista update status
-    public function updateStatus(Order $order, Request $request) {
-        $request->validate(['status' => 'required|in:pending,proses,selesai']);
-        $order->update(['status' => $request->status]);
-
-        return back()->with('success','Status order diperbarui!');
-    }
-
-
+    // Barista index
     public function baristaIndex()
     {
-        // Tampilkan semua order yang belum selesai
         $orders = Order::whereIn('status', ['pending', 'processing', 'ready'])
-        ->with('table')
-        ->orderBy('created_at', 'asc')
-        ->get();
+            ->with('table')
+            ->orderBy('created_at', 'asc')
+            ->get();
 
-        return view('barista.orders.index', compact('orders'));
+        // ambil notif untuk user barista yang login
+        $notifications = \App\Models\Notification::where('user_id', auth()->id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('barista.orders.index', compact('orders', 'notifications'));
     }
+
 
     public function baristaShow($id)
     {
@@ -95,14 +124,28 @@ class OrderController extends Controller
         return view('barista.orders.show', compact('order'));
     }
 
-    public function setReady($id)
+    public function markReady($orderId)
     {
-        $order = Order::findOrFail($id);
+        $order = Order::find($orderId);
 
-        $order->status = "ready";
+        if (!$order) {
+            return back()->with('error', 'Order tidak ditemukan!');
+        }
+
+        $order->status = 'ready';
         $order->save();
 
-        return redirect()->route('barista.orders.index')->with('success', 'Pesanan sudah siap!');
-    }
+        $waiter = User::find($order->user_id);
 
+        if ($waiter) {
+            Notify::send(
+                $waiter->id,
+                "Pesanan Siap!",
+                "Pesanan untuk meja {$order->table_id} sudah siap disajikan.",
+                "ready"
+            );
+        }
+
+        return back()->with('success', 'Status pesanan diubah menjadi READY');
+    }
 }

@@ -186,7 +186,8 @@
                 </div>
             </div>
 
-            <form action="{{ route('waiters.order.store') }}" method="POST">
+            <form action="{{ route('orders.storeFromTable') }}" method="POST">
+
                 @csrf
                 <input type="hidden" name="table_id" value="{{ $table->id }}">
 

@@ -167,6 +167,20 @@
             </div>
         </div>
 
+        @if(count($notifications) > 0)
+            <div style="margin-bottom: 25px; padding: 20px; background:#1e2536; border-radius:10px;">
+                <h4 style="margin-bottom: 15px;">Notifikasi</h4>
+
+                @foreach ($notifications as $n)
+                    <div style="padding: 12px; border-bottom:1px solid rgba(255,255,255,0.1);">
+                        <strong>{{ $n->title }}</strong><br>
+                        <small>{{ $n->message }}</small>
+                    </div>
+                @endforeach
+            </div>
+        @endif
+
+
         <!-- GRID -->
         <div class="orders-grid">
             @forelse ($orders as $order)

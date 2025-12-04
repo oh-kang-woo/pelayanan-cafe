@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Table;
 use App\Models\Menu;
-use App\Models\Order;
 use Illuminate\Http\Request;
 
 class WaiterOrderController extends Controller
@@ -13,19 +12,15 @@ class WaiterOrderController extends Controller
     public function selectTable()
     {
         $tables = Table::all();
-        return view('waiters.tables.select', compact('tables'));
+        return view('waiters.table.index', compact('tables'));
     }
 
-    // Halaman buat order
-    public function create(Table $table)
+    // Halaman buat order setelah pilih meja
+    public function create($tableId)
     {
+        $table = Table::findOrFail($tableId);
         $menus = Menu::all();
-        return view('waiters.orders.create', compact('table', 'menus'));
-    }
 
-    // Simpan order
-    public function store(Request $request)
-    {
-        // Next step nanti kita isi
+        return view('waiters.orders.create', compact('table', 'menus'));
     }
 }
