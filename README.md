@@ -1,59 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<img width="1261" height="637" alt="image" src="https://github.com/user-attachments/assets/c44e1c45-ea9d-4aae-9ad4-2f46c0e563c6" />
+Halaman Login Kafe merupakan gerbang utama untuk mengakses Sistem Informasi Pelayanan Kafe Online. Setiap pengguna wajib melakukan autentikasi terlebih dahulu sesuai dengan peran (role) yang dimiliki.
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+🔹 Informasi yang Ditampilkan
 
-## About Laravel
+Email Address
+Digunakan sebagai identitas akun pengguna.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Password
+Digunakan untuk menjaga keamanan akses sistem.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Tombol Login (Access System)
+Untuk memproses autentikasi dan masuk ke dalam sistem.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+🔹 Fitur Utama
 
-## Learning Laravel
+Autentikasi Berbasis Role
+Setelah login, pengguna akan diarahkan ke halaman sesuai dengan perannya, seperti waiter, barista, atau kasir.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Keamanan Akses
+Sistem memastikan hanya pengguna yang memiliki akun dan role yang valid yang dapat mengakses fitur tertentu.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+![WhatsApp Image 2026-01-07 at 11 48 03](https://github.com/user-attachments/assets/876589d7-cd88-4b89-a664-f7a273f9e4b4)
+Halaman Area Meja merupakan tampilan utama yang digunakan oleh waiter untuk memulai proses pemesanan di kafe. Pada halaman ini, waiter dapat melihat seluruh status meja secara real-time dan memilih meja yang tersedia.
 
-## Contributing
+🔹 Informasi yang Ditampilkan
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Daftar Meja (Meja 1 – Meja 12)
+Setiap meja ditampilkan dalam bentuk card agar mudah dikenali dan dipilih.
 
-## Code of Conduct
+Status Meja
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+AVAILABLE (Hijau)
+Menandakan meja masih kosong dan siap digunakan untuk membuat pesanan baru.
 
-## Security Vulnerabilities
+OCCUPIED (Merah)
+Menandakan meja sedang digunakan dan memiliki pesanan aktif.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+🔹 Fungsi Utama
 
-## License
+Waiter dapat langsung memilih meja yang berstatus AVAILABLE untuk memulai pesanan.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Meja yang berstatus OCCUPIED tidak dapat dipilih, sehingga menghindari pesanan ganda pada meja yang sama.
+
+Tampilan visual dengan warna hijau dan merah memudahkan waiter mengenali kondisi meja dengan cepat.
+
+![WhatsApp Image 2026-01-07 at 11 48 53](https://github.com/user-attachments/assets/0ca1db6c-a305-493c-87ad-fd13ccb4b5ea)
+
+halama dimana waiter memilih makanan dan minuman
+
+![WhatsApp Image 2026-01-07 at 11 51 02](https://github.com/user-attachments/assets/19e90986-97b4-4b0c-91ef-1c18dadd0ec0)
+
+☕ Halaman Detail Pesanan (Barista)
+
+Halaman Detail Pesanan Barista digunakan oleh barista untuk melihat dan memproses pesanan yang masuk dari meja pelanggan. Halaman ini menampilkan informasi pesanan secara jelas dan terfokus agar barista dapat bekerja dengan lebih efisien.
+
+🔹 Informasi yang Ditampilkan
+
+Nomor dan Nama Meja
+Menunjukkan asal pesanan (contoh: Meja 6).
+
+Nama Pelanggan
+Digunakan sebagai identifikasi tambahan untuk pesanan.
+
+Daftar Menu Pesanan
+Menampilkan daftar makanan dan minuman beserta jumlah pesanannya.
+
+Waktu Pesanan
+Menunjukkan waktu pesanan dibuat untuk membantu prioritas pengerjaan.
+
+🔹 Fitur Utama
+
+Tandai Selesai
+Tombol untuk menandai bahwa pesanan telah selesai disiapkan oleh barista.
+Setelah ditekan, status pesanan akan berubah dan dapat dilanjutkan ke proses berikutnya.
+
+Filter Pesanan Berdasarkan Tanggal
+Barista dapat memfilter daftar pesanan berdasarkan tanggal tertentu untuk memudahkan pencarian data.
+
+![WhatsApp Image 2026-01-07 at 11 51 17](https://github.com/user-attachments/assets/ff525d4b-d3e4-4209-bb29-c627d82dec06)
+
+
+🍳 Halaman Kitchen Display
+
+Halaman Kitchen Display digunakan oleh barista atau staf dapur untuk memantau pesanan yang masuk secara real-time. Halaman ini menampilkan notifikasi pesanan baru dan status setiap pesanan sehingga proses persiapan dapat dilakukan dengan lebih teratur.
+
+🔹 Informasi yang Ditampilkan
+
+Notifikasi Pesanan Masuk
+Menampilkan daftar pesanan baru dari berbagai meja secara berurutan.
+
+Nomor dan Nama Meja
+Menunjukkan asal pesanan (contoh: Meja 6).
+
+Status Pesanan
+Menampilkan status pesanan seperti READY untuk menandakan pesanan telah selesai disiapkan.
+
+Waktu Pesanan
+Menampilkan waktu pesanan dibuat untuk membantu pengaturan prioritas pengerjaan.
+
+🔹 Fitur Utama
+
+Lihat Detail Pesanan
+Tombol untuk melihat rincian menu yang dipesan oleh pelanggan.
+
+Filter Pesanan Berdasarkan Tanggal
+Memudahkan staf dalam melihat data pesanan pada tanggal tertentu.
+
+
+
+
+
