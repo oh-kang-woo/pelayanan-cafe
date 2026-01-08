@@ -1,0 +1,139 @@
+/* ============================================================
+   SIDEBAR (MATCH FULL NAVBAR STYLE)
+   ============================================================ */
+.c-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: #1c1b1a;
+    border-right: 2px solid #c59d5f;
+    padding: 20px 18px;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Inter', sans-serif;
+    color: #e6e1d8;
+}
+
+/* ============================================================
+   LOGO
+   ============================================================ */
+.c-sidebar__logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 25px;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #c59d5f;
+    border-bottom: 1px solid #c59d5f55;
+}
+
+.c-sidebar__logo i {
+    color: #c59d5f;
+}
+
+/* ============================================================
+   MENU
+   ============================================================ */
+.c-sidebar__menu {
+    margin-top: 25px;
+    padding: 0;
+    list-style: none;
+}
+
+.c-sidebar__menu li {
+    margin-bottom: 12px;
+}
+
+.c-sidebar__menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    font-size: 0.96rem;
+    color: #e6e1d8;
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    transition: 0.25s all ease;
+}
+
+.c-sidebar__menu a:hover {
+    background: #c59d5f22;
+    color: #c59d5f;
+    border-color: #c59d5f55;
+}
+
+.c-sidebar__menu a.active {
+    background: #c59d5f22;
+    color: #c59d5f;
+    border-left: 3px solid #c59d5f;
+}
+
+/* ============================================================
+   FILTER CARD (TOP SIDE)
+   ============================================================ */
+.c-filter-top {
+    margin-bottom: 25px;
+}
+
+.c-filter-card {
+    background: #1f1e1d;
+    border: 1px solid #c59d5f55;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.c-filter-label {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 0.78rem;
+    color: #c59d5f;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ============================================================
+   FILTER INPUT
+   ============================================================ */
+.c-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.c-input-date {
+    flex: 1;
+    padding: 10px;
+    font-size: 0.95rem;
+    color: #e6e1d8;
+    background: #1c1b1a;
+    border: 1px solid #c59d5f55;
+    border-radius: 8px;
+    transition: 0.25s ease;
+}
+
+.c-input-date:focus {
+    outline: none;
+    border-color: #c59d5f;
+    box-shadow: 0 0 8px #c59d5f33;
+}
+
+/* ============================================================
+   FILTER BUTTON
+   ============================================================ */
+.c-btn-filter {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #1c1b1a;
+    background: #c59d5f;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.25s ease;
+}
+
+.c-btn-filter:hover {
+    background: #b1874f;
+}
